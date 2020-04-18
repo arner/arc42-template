@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+  <!--Set page title here-->
+  <title>Architecture documentation</title>
+  <!----------------------->
+
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=8.0, minimum-scale=1.0">
+  <!-- <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css"> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
+</head>
+<body>
+  <div id="app"></div>
+  <script src="//unpkg.com/docsify-edit-on-github/index.js"></script>
+  <script>
+    let docBase = null;
+
+    const plugins = [];
+    if (window.navigator.userAgent.indexOf('HeadlessChrome') == -1) {
+
+      //----- Set repo here.-----//
+      docBase = 'https://github.com/arner/arc42-template';
+      const editBase = 'https://github.com/arner/arc42-template/edit/master/docs/';
+      //-------------------------//
+      
+      plugins.push(EditOnGithubPlugin.create(docBase, editBase, 'Edit on GitHub'));
+    }
+
+    window.$docsify = {
+      name: document.title,
+      repo: docBase,
+      auto2top: true,
+      loadSidebar: true,
+      loadNavbar: true,
+      subMaxLevel: 2,
+      maxLevel: 3,
+      plugins: plugins,
+      // logo: 'logo.png'
+      // coverpage: 'README.md',
+    }
+  </script>
+  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+</body>
+</html>

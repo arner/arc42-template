@@ -1,0 +1,11 @@
+@startuml
+
+!include ../../lib/plantuml/puml-theme-cerulean-outline.puml
+
+start
+:Hello world;
+:This is a plantuml
+diagram;
+stop
+
+@enduml
