@@ -17,16 +17,31 @@
     <div id="app"></div>
     <script src="//unpkg.com/docsify-edit-on-github/index.js"></script>
     <script>
-      let docBase = null
+      let docBase = null;
+      const plugins = [];
 
-      const plugins = []
-      if (window.navigator.userAgent.indexOf('HeadlessChrome') == -1) {
+      // Some plugins should only be used on the live page and not when we're creating a PDF.
+
+      const notInPDFRenderMode = window.navigator.userAgent.indexOf('HeadlessChrome') == -1;
+      if (notInPDFRenderMode) {
         //----- Set repo here------//
         docBase = 'https://github.com/arner/arc42-template'
         const editBase = `${docBase}/edit/master/docs/`
         //-------------------------//
 
-        plugins.push(EditOnGithubPlugin.create(docBase, editBase, 'Edit on GitHub'))
+        plugins.push(EditOnGithubPlugin.create(docBase, editBase, 'Edit on GitHub'));
+
+        plugins.push(function(hook) {
+          var footer = [
+            '<footer style="text-align:right; margin-top:40px">',
+            '<small>Last modified {docsify-updated}</small>',
+            '</footer>'
+          ].join('');
+
+          hook.beforeEach(function(html) {
+            return html + footer;
+          });
+        });
       }
 
       window.$docsify = {
@@ -38,12 +53,13 @@
         subMaxLevel: 2,
         maxLevel: 3,
         plugins: plugins,
+        formatUpdated: '{YYYY}-{MM}-{DD}',
         search: {
           namespace: 'architecture-docs',
-        }
+        },
         // logo: 'logo.png'
         // coverpage: 'README.md',
-      }
+      };
     </script>
     <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
