@@ -1,33 +1,40 @@
 #!/bin/sh -e
 
-dir='docs'
+if [ "${PWD##*/}" != 'docs' ]; then
+  echo "Execute this script from the 'docs' directory."
+  exit 1
+fi
 
-function check() {
-  if [ "${PWD##*/}" != $dir ]; then
-    echo "Execute this script from the $dir directory."
-    exit 1
-  fi
+if [ ! -f "node_modules/.bin/puml" ]; then
+  echo "Run 'npm i' to install dependencies."
+  exit 1
+fi
 
-  if [ ! -f "../node_modules/.bin/puml" ]; then
-    echo "Run 'npm i' to install dependencies."
-  fi
+PUML_PATH=`echo $(cd $(dirname node_modules/.bin/puml); pwd)/puml`
+
+function process_diagrams_in_dir() {
+  for i in `find . -maxdepth 1 -name "*.puml"`; do
+    echo "Processing $i"
+    eval "$PUML_PATH generate -o $i.png --png $i"
+  done
 }
 
 function generate_diagrams() {
-  working_dir="$PWD"
+  cd diagrams
+  process_diagrams_in_dir
 
-  cd $1
-  for i in *.puml; do 
-    ../node_modules/.bin/puml generate -o $i.png --png $i
+  # node-plantuml doesn't handle relative paths well, so we have to enter the directory.
+  for d in ./*/ ; do 
+    cd $d
+    process_diagrams_in_dir
+    cd ..
   done
-
-  cd "$working_dir"
 }
 
 function install_adr_template() {
-  destdir=node_modules/adr-tools/build/main/lib/templates
-  old=${destdir}/en.md
-  new=../lib/adr_template.md
+  local destdir=node_modules/adr-tools/build/main/lib/templates
+  local old=${destdir}/en.md
+  local new=../lib/adr_template.md
 
   if [ ! -f "$new" ]; then
     echo "Template $new not found"
@@ -38,14 +45,13 @@ function install_adr_template() {
 }
 
 function generate_toc() {
-  input_dir=$1
-  header=$2
-  bullet=${3:--}
+  local input_dir=$1 header=$2 bullet=${3:--}
+  local files=`find $input_dir -maxdepth 1 -name "*.md" | awk '!/README.md/ && !/_sidebar.md/' | sort` 
 
   output="$header"
 
   IFS=$'\n'
-  for file in `ls $input_dir/*.md | awk '!/README.md/ && !/_sidebar.md/'`
+  for file in $files
   do
     pretty=${file%.*}
     pretty=${pretty//_/\ }
@@ -67,14 +73,21 @@ generate_all_toc() {
   insertAfter _sidebar.md "09" `printf %q $adr`
 
   # Table of Contents (used for PDF)
-  tocfile=00._Table_of_Contents.md
+  local tocfile=00._Table_of_Contents.md
   generate_toc . "# Table of Contents\n" > $tocfile
   insertAfter $tocfile "09" `printf %q $adr`
   awk '!/00/' < $tocfile > temp.md && mv temp.md $tocfile
+
+  echo "Generated Table of Contents"
 }
 
 function insertAfter(){ # file line newText
   local file="$1" line="$2" newText="$3"
+
+  if [[ -z "$newText" || "z$newText" == "z''" ]]; then 
+    return 0
+  fi
+
   if [[ `uname` == 'Darwin' ]]; then
     sed -i '' -e "/09/a"$'\\\n'"$newText"$'\n' "$file"
   else
@@ -84,13 +97,13 @@ function insertAfter(){ # file line newText
 
 case $1 in
   "diagrams" )
-    generate_diagrams ${2:-diagrams};;
+    generate_diagrams;;
   "toc" )
     generate_all_toc;;
   "install_adr_template" )
     install_adr_template;;
   "all" )
-    generate_diagrams diagrams
+    generate_diagrams
     generate_all_toc
     ;;
 esac

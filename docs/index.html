@@ -23,9 +23,9 @@
     const plugins = [];
     if (window.navigator.userAgent.indexOf('HeadlessChrome') == -1) {
 
-      //----- Set repo here.-----//
+      //----- Set repo here------//
       docBase = 'https://github.com/arner/arc42-template';
-      const editBase = 'https://github.com/arner/arc42-template/edit/master/docs/';
+      const editBase = `${docBase}/edit/master/docs/`;
       //-------------------------//
       
       plugins.push(EditOnGithubPlugin.create(docBase, editBase, 'Edit on GitHub'));
