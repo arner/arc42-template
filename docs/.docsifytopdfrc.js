@@ -1,11 +1,9 @@
-const package=require('./package.json');
-const date = new Date().toISOString().split('T')[0];
+const package = require('./package.json')
+const date = new Date().toISOString().split('T')[0]
 
 module.exports = {
   pathToDocsifyEntryPoint: '.',
-  contents: [
-    '_sidebar.md'
-  ],
+  contents: ['_sidebar.md'],
   mainMdFilename: 'README.md',
   pathToPublic: `../output/${package.name} v${package.version} - ${date}.pdf`,
   removeTemp: true,
@@ -16,7 +14,7 @@ module.exports = {
       top: '2cm',
       bottom: '5cm',
       right: '2cm',
-      left: '2cm'
+      left: '2cm',
     },
     displayHeaderFooter: true,
     headerTemplate: `
@@ -26,7 +24,7 @@ module.exports = {
     footerTemplate: `
     <div style="color: lightgray; font-size: 8px; text-align: center; width: 100%;">
       <span class="pageNumber"></span>/<span class="totalPages">
-    </div>`
+    </div>`,
   },
-  emulateMedia: 'screen'
-};
+  emulateMedia: 'screen',
+}

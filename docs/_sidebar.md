@@ -1,4 +1,3 @@
-
 - [00. Table of Contents](./00._Table_of_Contents.md)
 - [01. Introduction and Goals](./01._Introduction_and_Goals.md)
 - [02. Architecture Constraints](./02._Architecture_Constraints.md)
@@ -9,7 +8,6 @@
 - [07. Deployment View](./07._Deployment_View.md)
 - [08. Crosscutting Concepts](./08._Crosscutting_Concepts.md)
 - [09. Architecture Decisions](./09._Architecture_Decisions.md)
-  - [0001 first decision](adr/0001-first-decision.md)
 - [10. Quality Requirements](./10._Quality_Requirements.md)
 - [11. Risks and Technical Debt](./11._Risks_and_Technical_Debt.md)
 - [12. Glossary](./12._Glossary.md)

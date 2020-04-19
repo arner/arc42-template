@@ -1,0 +1,14 @@
+{
+  "plugins": [
+    ["remark-preset-lint-recommended", true],
+    ["remark-preset-lint-markdown-style-guide", true],
+    ["remark-lint-write-good", false],
+    ["remark-lint-are-links-valid", true],
+    ["remark-lint-no-dead-urls", true],
+    ["remark-validate-links", true],
+    ["lint-list-item-indent", false],
+    ["lint-list-item-spacing", false],
+    ["lint-no-file-name-irregular-characters", false],
+    ["lint-no-file-name-mixed-case", false]
+  ]
+}

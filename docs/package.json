@@ -7,16 +7,27 @@
     "adr-tools": "^2.0.4",
     "docsify": "^4.11.3",
     "docsify-pdf-converter": "^2.0.7",
-    "node-plantuml": "^0.9.0"
+    "node-plantuml": "^0.9.0",
+    "remark-cli": "^8.0.0",
+    "remark-lint": "^7.0.0",
+    "remark-lint-are-links-valid": "^1.0.3",
+    "remark-lint-no-dead-urls": "^1.0.2",
+    "remark-lint-write-good": "^1.2.0",
+    "remark-preset-lint-markdown-style-guide": "^3.0.0",
+    "remark-preset-lint-recommended": "^4.0.0",
+    "remark-validate-links": "^10.0.0"
   },
   "scripts": {
     "postinstall": "../lib/tools.sh install_adr_template",
     "update": "../lib/tools.sh all",
     "diagrams": "../lib/tools.sh diagrams",
     "toc": "../lib/tools.sh toc",
-    "adr": "node_modules/.bin/adr-tools",
-    "pdf": "node_modules/.bin/docsify-pdf-converter",
-    "serve": "node_modules/.bin/docsify serve"
+    "adr": "adr-tools",
+    "pdf": "docsify-pdf-converter",
+    "serve": "node_modules/.bin/docsify serve",
+    "lint": "remark .",
+    "lint-language": "remark . --use lint-write-good",
+    "test": "npm run lint"
   },
   "author": ""
 }
