@@ -29,6 +29,8 @@ function generate_diagrams() {
     process_diagrams_in_dir
     cd ..
   done
+
+  cd ..
 }
 
 function install_adr_template() {
