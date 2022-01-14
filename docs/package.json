@@ -2,10 +2,9 @@
   "name": "architecture",
   "version": "1.0.0",
   "description": "Architecture documentation",
-  "dependencies": {},
   "devDependencies": {
     "adr-tools": "^2.0.4",
-    "docsify": "^4.12.2",
+    "docsify": "^4.11.4",
     "docsify-pdf-converter": "^2.0.7",
     "remark-cli": "^10.0.1",
     "remark-lint": "^9.1.1",
