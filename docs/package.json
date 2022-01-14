@@ -5,16 +5,16 @@
   "dependencies": {},
   "devDependencies": {
     "adr-tools": "^2.0.4",
-    "docsify": "^4.11.3",
+    "docsify": "^4.12.2",
     "docsify-pdf-converter": "^2.0.7",
-    "remark-cli": "^8.0.0",
-    "remark-lint": "^7.0.0",
+    "remark-cli": "^10.0.1",
+    "remark-lint": "^9.1.1",
     "remark-lint-are-links-valid": "^1.0.3",
-    "remark-lint-no-dead-urls": "^1.0.2",
+    "remark-lint-no-dead-urls": "^1.1.0",
     "remark-lint-write-good": "^1.2.0",
-    "remark-preset-lint-markdown-style-guide": "^3.0.0",
-    "remark-preset-lint-recommended": "^4.0.0",
-    "remark-validate-links": "^10.0.1"
+    "remark-preset-lint-markdown-style-guide": "^5.1.2",
+    "remark-preset-lint-recommended": "^6.1.2",
+    "remark-validate-links": "^11.0.2"
   },
   "scripts": {
     "postinstall": "../lib/tools.sh install_adr_template",
